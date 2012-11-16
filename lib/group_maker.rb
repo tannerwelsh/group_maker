@@ -1,6 +1,10 @@
 module GroupMaker
-  PRIORITIES = [1 2 3]
+  PRIORITIES = [1,2,3]
   GROUP_SIZE_LIMIT = 4
+
+  def self.generate!
+    List.new.build_projects!
+  end
 
   class Group
     attr_reader :project, :choices

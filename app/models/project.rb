@@ -1,3 +1,5 @@
+require 'group_maker'
+
 class Project < ActiveRecord::Base
   attr_accessible :name
 
@@ -14,5 +16,9 @@ class Project < ActiveRecord::Base
 
   def purge_members!
     members.each(&:leave_project!)
+  end
+
+  def self.make_groups!
+    GroupMaker.generate!
   end
 end
