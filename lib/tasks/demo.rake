@@ -27,7 +27,7 @@ namespace :demo do
         1.upto(3) do |priority|
           begin
             project = projects.sample
-          end while user.project_choices.any? { |choice| choice.project == project }
+          end while user.choices.any? { |choice| choice.project == project }
           
           ProjectChoice.create(user_id: user.id, project_id: project.id, priority: priority)
         end

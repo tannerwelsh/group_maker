@@ -1,6 +1,6 @@
 <h1>Listing projects</h1>
 
-<table>
+<table id="projects">
   <tr>
     <th>Name</th>
     <th>Members</th>
@@ -12,7 +12,7 @@
 <% @projects.each do |project| %>
   <tr>
     <td><%= project.name %></td>
-    <td><%= project.member_names %></td>
+    <td><%= project.member_names.join(', ') %></td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -20,6 +20,22 @@
 <% end %>
 </table>
 
-<br />
+<table id="users">
+  <tr>
+    <th>Name</th>
+    <th>Has group?</th>
+    <th>First Choice</th>
+    <th>Second Choice</th>
+    <th>Third Choice</th>
+  </tr>
 
-<%= link_to 'New Project', new_project_path %>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.has_project? %></td>
+    <td class=<%= "highlight" if user.chosen?(1) %>><%= display_name(user.choice 1) %></td>
+    <td class=<%= "highlight" if user.chosen?(2) %>><%= display_name(user.choice 2) %></td>
+    <td class=<%= "highlight" if user.chosen?(3) %>><%= display_name(user.choice 3) %></td>
+  </tr>
+<% end %>
+</table>

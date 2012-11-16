@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.includes(:members)
+    @users    = User.includes(:choices)
 
     respond_to do |format|
       format.html # index.html.erb
