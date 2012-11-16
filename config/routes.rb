@@ -1,9 +1,10 @@
 GroupMaker::Application.routes.draw do
-  resources :project_choices
+  
+  resources :users
 
   resources :projects
 
-  resources :users
+  resources :project_choices
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

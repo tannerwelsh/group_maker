@@ -1,6 +1,5 @@
 class Project < ActiveRecord::Base
   attr_accessible :name
 
-  has_many :project_members
-  has_many :users, through: :project_members
+  has_many :members, class_name: 'User'
 end
