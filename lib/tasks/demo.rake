@@ -13,18 +13,21 @@ namespace :demo do
         project_name, project_lead_name = row
 
         project = Project.create(name: project_name)
+        lead    = User.find_by_name(project_lead_name)
 
-        User.find_by_name(project_lead_name).join_project(project)
+        lead.join_project(project)
+        lead.choices.create(project_id: project.id, priority: 1)
       end
     end  
 
     desc "Build choices for each member"
     task :choices => :environment do
-      ProjectChoice.delete_all if ProjectChoice.any?
       projects = Project.all
 
-      User.all.each do |user|
+      User.includes(:choices).each do |user|
         1.upto(3) do |priority|
+          next unless user.choice(priority).nil?
+
           begin
             project = projects.sample
           end while user.choices.any? { |choice| choice.project == project }
