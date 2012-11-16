@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   belongs_to :project
   has_many :choices, class_name: 'ProjectChoice'
+  has_many :created_projects, class_name: 'Project', foreign_key: :creator_id
 
   scope :has_project, where('project_id IS NOT NULL')
   scope :needs_project, where(project_id: nil)

@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
 
   has_many :members, class_name: 'User'
   has_many :choices, class_name: 'ProjectChoice'
+  belongs_to :creator, class_name: 'User'
 
   def group_size
     members.count
