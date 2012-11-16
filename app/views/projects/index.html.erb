@@ -33,9 +33,9 @@
   <tr <%= 'class=unchosen' if user.needs_project? %>>
     <td><%= user.name %></td>
     <td><%= user.has_project? %></td>
-    <td <%= 'class=highlight' if user.chosen?(1) %>><%= display_name(user.choice 1) %></td>
-    <td <%= 'class=highlight' if user.chosen?(2) %>><%= display_name(user.choice 2) %></td>
-    <td <%= 'class=highlight' if user.chosen?(3) %>><%= display_name(user.choice 3) %></td>
+    <td <%= 'class=highlight' if user.chosen?(1) %>><%= display_name(user.choice(1)) %></td>
+    <td <%= 'class=highlight' if user.chosen?(2) %>><%= display_name(user.choice(2)) %></td>
+    <td <%= 'class=highlight' if user.chosen?(3) %>><%= display_name(user.choice(3)) %></td>
   </tr>
 <% end %>
 </table>

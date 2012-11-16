@@ -1,6 +1,15 @@
 namespace :demo do
   
   namespace :build do
+    desc "Drop and build everything"
+    task :all => :environment do
+      %w{ db:drop db:migrate db:seed demo:build:projects demo:build:choices }.each do |task|
+        puts "Invoking #{task}..."
+        Rake::Task[task].invoke  
+      end
+
+      Project.make_groups!
+    end
     
     desc "Populate the database with demo projects"
     task :projects => :environment do
@@ -24,13 +33,13 @@ namespace :demo do
     task :choices => :environment do
       projects = Project.all
 
-      User.includes(:choices).each do |user|
+      User.all.each do |user|
         1.upto(3) do |priority|
-          next unless user.choice(priority).nil?
+          next if user.choices.map(&:priority).include? priority
 
           begin
             project = projects.sample
-          end while user.choices.any? { |choice| choice.project == project }
+          end until user.choices.all? { |choice| choice.project.id != project.id }
           
           ProjectChoice.create(user_id: user.id, project_id: project.id, priority: priority)
         end

@@ -4,6 +4,12 @@ class ProjectChoice < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
+  # FIXME: This is not working
+  # validates :project_id,  uniqueness: { scope: :user_id } 
+  # validates :priority,    uniqueness: { scope: :user_id }
+  validates :priority,    inclusion:  { :in => [1,2,3] }
+
+
   def first_choice?
     priority == 1
   end
@@ -15,4 +21,5 @@ class ProjectChoice < ActiveRecord::Base
   def third_choice?
     priority == 3
   end
+
 end

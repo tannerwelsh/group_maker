@@ -22,10 +22,6 @@ module GroupMaker
       @choices.map(&:user)
     end
 
-    def has_interest?(priority)
-      @choices.any? { |c| c.priority == priority }
-    end
-
     def high_interest?
       @choices.select(&:first_choice?).count >= 4
     end
@@ -69,9 +65,11 @@ module GroupMaker
     def project_from_group(group)
       users = select_users(group)
 
-      group.nullify_project! if users.any?(&:nil?)
-
-      users.each { |user| user.join_project(group.project) }
+      if users.any?(&:nil?)
+        group.nullify_project!
+      else
+        users.each { |user| user.join_project(group.project) }
+      end
     end
 
     def select_users(group)

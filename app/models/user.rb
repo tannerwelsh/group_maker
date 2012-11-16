@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def chosen?(n)
-    choice(n).project == self.project
+    choice(n) && choice(n).project == self.project
   end
 
 end
