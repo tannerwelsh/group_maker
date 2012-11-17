@@ -1,13 +1,13 @@
 class GroupBuilder
-  PRIORITIES = [1,2,3]
   GROUP_SIZE_LIMIT = 4
 
   def self.build_projects!
     new.build_projects!
   end
 
-  def initialize      
-    @priority_stack = Hash[PRIORITIES.map { |n| [n, []] }]
+  def initialize
+    @priority_options = ProjectChoice::PRIORITIES
+    @priority_stack   = Hash[@priority_options.map { |n| [n, []] }]
   end
 
   def build_projects!
@@ -39,7 +39,7 @@ private
   end
 
   def user_from_group(group)      
-    PRIORITIES.each do |priority|
+    @priority_options.each do |priority|
       next unless group.users.any? { |user| in_stack?(user, priority) }
       return select_from_stack(group.users, priority)
     end
