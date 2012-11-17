@@ -34,4 +34,7 @@ GroupMaker::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Add lib files to load path
+  config.autoload_paths += %W(#{config.root}/lib/)
 end

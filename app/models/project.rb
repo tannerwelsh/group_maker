@@ -1,5 +1,3 @@
-require 'group_maker'
-
 class Project < ActiveRecord::Base
   attr_accessible :name
 
@@ -20,6 +18,6 @@ class Project < ActiveRecord::Base
   end
 
   def self.make_groups!
-    GroupMaker.generate!
+    GroupBuilder.generate!
   end
 end
