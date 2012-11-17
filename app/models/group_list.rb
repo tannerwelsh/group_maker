@@ -1,4 +1,4 @@
-class GroupBuilder
+class GroupList
   GROUP_SIZE_LIMIT = 4
 
   def self.build_projects!

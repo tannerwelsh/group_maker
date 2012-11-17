@@ -14,7 +14,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.make_groups!
-    GroupBuilder.generate!
+    GroupList.generate!
   end
 
   def interest_level
