@@ -20,11 +20,13 @@ class Group
 
   def next_member
     return nil if @choices.empty?
-    user = @choices.sort{ |a,b| a.priority <=> b.priority }.shift.user
+    @choices.sort_by!(&:priority)
+    top_choice = @choices.shift
+    return top_choice.user
   end
 
   def purge_selected_users!
-    @choices.reject! { |choice| choice.user.has_project? }
+    @choices.delete_if(&:user_selected?)
   end
 
   def nullify_project!

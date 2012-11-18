@@ -7,8 +7,6 @@ namespace :demo do
         puts "Invoking #{task}..."
         Rake::Task[task].invoke  
       end
-
-      Project.make_groups!
     end
     
     desc "Populate the database with demo projects"

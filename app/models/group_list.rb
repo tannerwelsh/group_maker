@@ -1,8 +1,8 @@
 class GroupList
-  GROUP_SIZE_LIMIT = 4
+  GROUP_SIZE = (3..4)
 
-  def self.build_projects!
-    new.build_projects!
+  def self.generate!
+    new.generate_groups!
   end
 
   def initialize
@@ -10,22 +10,33 @@ class GroupList
     @priority_stack   = Hash[@priority_options.map { |n| [n, []] }]
   end
 
-  def build_projects!
+  def generate_groups!
     raw_groups.each do |group|
       group.purge_selected_users!
+
       project_from_group(group)
       
       prioritize_unpicked_users(group)
+      puts "PRIORITY STACK COUNT BEFORE clean_stack: #{@priority_stack.values.flatten.count}"
       clean_stack
+      puts "PRIORITY STACK COUNT AFTER clean_stack: #{@priority_stack.values.flatten.count}"
     end
   end
 
 private
 
+  def raw_groups
+    Project.sorted_by_priority(1).map do |project|
+      Group.new(project, project.choices)
+    end
+  end
+
   def project_from_group(group)
     users = select_users(group)
 
-    if users.any?(&:nil?)
+    puts "USERS: #{users.map(&:name)}"
+
+    unless GROUP_SIZE.include?(users.count + group.size)
       group.nullify_project!
     else
       users.each { |user| user.join_project(group.project) }
@@ -33,15 +44,16 @@ private
   end
 
   def select_users(group)
-    group.size.upto(GROUP_SIZE_LIMIT).map do
-      user_from_group(group)        
+    (GROUP_SIZE.last - group.size).times.map do
+      user_from_group(group)
     end
   end
 
   def user_from_group(group)      
     @priority_options.each do |priority|
-      next unless group.users.any? { |user| in_stack?(user, priority) }
-      return select_from_stack(group.users, priority)
+      if group.users.any? { |user| in_stack?(user, priority) }
+        return select_from_stack(group.users, priority)
+      end
     end
 
     group.next_member
@@ -55,23 +67,20 @@ private
     @priority_stack[priority].include? user
   end
 
-  def raw_groups
-    # TODO: Change this scope to 'top_choices'
-    Project.all.map do |project|
-      Group.new(project, project.choices)
-    end
-  end
-
-  def prioritize_unpicked_users(group)
-    group.choices.each do |choice|
-      next if choice.user.has_project?
-      @priority_stack[choice.priority] << choice.user 
-    end
+  def add_to_stack(user, priority)
+    @priority_stack[priority] << user 
   end
 
   def clean_stack
     @priority_stack.each_pair do |priority, users|
       @priority_stack[priority] = users.select(&:needs_project?)
+    end
+  end
+
+  def prioritize_unpicked_users(group)
+    group.choices.each do |choice|
+      next if choice.user_selected?
+      add_to_stack(choice.user, choice.priority)
     end
   end
 

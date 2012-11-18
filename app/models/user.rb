@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   scope :needs_project, where(project_id: nil)
 
   def needs_project?
-    self.project_id.nil?
+    project.nil?
   end
 
   def has_project?
@@ -17,11 +17,11 @@ class User < ActiveRecord::Base
   end
 
   def join_project(project)
-    self.update_attribute(:project_id, project.id)
+    tap { |u| u.project = project }.save!
   end
 
   def leave_project!
-    self.update_attribute(:project_id, nil)
+    tap { |u| u.project = nil }.save!
   end
 
   def choice(n)

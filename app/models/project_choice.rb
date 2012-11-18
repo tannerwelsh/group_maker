@@ -18,6 +18,10 @@ class ProjectChoice < ActiveRecord::Base
     (priority - (PRIORITIES.count + 1)).abs * 10
   end
 
+  def user_selected?
+    user.has_project?
+  end
+
   def first_choice?
     priority == 1
   end
