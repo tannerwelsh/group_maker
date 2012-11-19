@@ -6,7 +6,7 @@ class ProjectChoice < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
-  scope :with_priority, lambda{|priority| where(:priority => priority)}
+  scope :with_priority, lambda{|priority| where(priority: priority)}
 
   # FIXME: This is not working
   # validates :project_id,  uniqueness: { scope: :user_id } 

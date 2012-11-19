@@ -3,7 +3,7 @@ namespace :demo do
   namespace :build do
     desc "Drop & rebuild db; populate with users, projects, choices; make groups"
     task :all => :environment do
-      %w{ db:drop db:migrate db:seed demo:build:projects demo:build:choices }.each do |task|
+      %w{ db:schema:load db:seed demo:build:projects demo:build:choices }.each do |task|
         puts "Invoking #{task}..."
         Rake::Task[task].invoke  
       end
@@ -23,7 +23,6 @@ namespace :demo do
         creator = User.find_by_name(project_lead_name)
         project = creator.created_projects.create(name: project_name)
         
-        creator.join_project(project)
         creator.choices.create(project_id: project.id, priority: 1)
       end
     end  

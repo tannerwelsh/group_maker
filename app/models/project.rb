@@ -13,10 +13,6 @@ class Project < ActiveRecord::Base
     all.sort_by{|proj| proj.interest_by_priority(priority)}.reverse
   end
 
-  def self.make_groups!
-    GroupList.generate!
-  end
-
   def interest_level
     # Numeral to gauge the overall interest in a project
     choices.inject(0) do |memo, choice| 

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   scope :has_project, where('project_id IS NOT NULL')
   scope :needs_project, where(project_id: nil)
+  scope :alphabetical, order(:name)
 
   def needs_project?
     project.nil?
@@ -14,6 +15,10 @@ class User < ActiveRecord::Base
 
   def has_project?
     !needs_project?
+  end
+
+  def is_creator?
+    created_projects.count > 0
   end
 
   def join_project(project)

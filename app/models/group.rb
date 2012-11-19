@@ -14,6 +14,10 @@ class Group
     @choices.map(&:user)
   end
 
+  def project_creator
+    @project.creator
+  end
+
   def high_interest?
     @choices.select(&:first_choice?).count >= 4
   end
@@ -25,13 +29,17 @@ class Group
     return top_choice.user
   end
 
+  def remove!(user)
+    @choices.delete_if { |choice| choice.user == user }
+  end
+
   def purge_selected_users!
     @choices.delete_if(&:user_selected?)
   end
 
   def nullify_project!
     puts "Not enough interest in #{project.name}"
-    project.purge_members!
+    @project.purge_members!
   end
 
   def to_s

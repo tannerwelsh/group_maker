@@ -3,6 +3,7 @@
 <table id="projects">
   <tr>
     <th>Name</th>
+    <th>Creator</th>
     <th>Members</th>
     <th></th>
     <th></th>
@@ -12,7 +13,10 @@
 <% @projects.each do |project| %>
   <tr>
     <td><%= project.name %></td>
-    <td><%= project.member_names.join(', ') %></td>
+    <td><%= project.creator.name %></td>
+    <td <%= 'class=highlight' if project.group_size == GroupList::GROUP_SIZE %>>
+      <%= project.group_size.to_s + ": " + project.member_names.join(', ') %>
+    </td>
     <td><%= link_to 'Show', project %></td>
     <td><%= link_to 'Edit', edit_project_path(project) %></td>
     <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -2,8 +2,8 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.includes(:members)
-    @users    = User.includes(:choices)
+    @projects = Project.sorted_by_popularity
+    @users    = User.alphabetical.includes(:choices)
 
     respond_to do |format|
       format.html # index.html.erb
