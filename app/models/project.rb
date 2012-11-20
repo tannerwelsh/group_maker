@@ -32,6 +32,10 @@ class Project < ActiveRecord::Base
     members.map(&:name)
   end
 
+  def creator_name
+    creator.name
+  end
+
   def purge_members!
     members.each(&:leave_project!)
   end

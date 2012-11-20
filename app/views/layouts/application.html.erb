@@ -48,6 +48,11 @@
           <div class="container-fluid nav-collapse">
             <ul class="nav">
               <li><%= link_to "Projects", projects_path %></li>
+              <% if user_signed_in? %>
+                <li><%= link_to "Sign out", destroy_user_session_path %></li>
+              <% else %>
+                <li><%= link_to "Sign in", new_user_session_path %></li>
+              <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -63,7 +68,6 @@
       </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2012</p>
       </footer>
 
     </div> <!-- /container -->

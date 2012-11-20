@@ -22,4 +22,8 @@ class ProjectChoice < ActiveRecord::Base
     user.has_project?
   end
 
+  def project_name
+    project.name
+  end
+
 end
