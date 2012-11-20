@@ -8,6 +8,6 @@ module ProjectChoicesHelper
   end
 
   def project_id_for(form)
-    form.object.project.id
+    form.object.project.id if form.object.project
   end
 end
