@@ -1,45 +1,38 @@
-<h1>Listing projects</h1>
-
-<table id="projects">
-  <tr>
-    <th>Name</th>
-    <th>Creator</th>
-    <th>Members</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @projects.each do |project| %>
-  <tr>
-    <td><%= project.name %></td>
-    <td><%= project.creator.name %></td>
-    <td <%= 'class=highlight' if project.group_size == GroupList::GROUP_SIZE %>>
-      <%= project.group_size.to_s + ": " + project.member_names.join(', ') %>
-    </td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = Project -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:creator_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= link_to project.id, project_path(project) %></td>
+        <td><%= project.name %></td>
+        <td><%= project.creator_id %></td>
+        <td><%=l project.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_project_path(project), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      project_path(project),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<table id="users">
-  <tr>
-    <th>Name</th>
-    <th>Has group?</th>
-    <th>First Choice</th>
-    <th>Second Choice</th>
-    <th>Third Choice</th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr <%= 'class=unchosen' if user.needs_project? %>>
-    <td><%= user.name %></td>
-    <td><%= user.has_project? %></td>
-    <td <%= 'class=highlight' if user.chosen?(1) %>><%= display_name(user.choice(1)) %></td>
-    <td <%= 'class=highlight' if user.chosen?(2) %>><%= display_name(user.choice(2)) %></td>
-    <td <%= 'class=highlight' if user.chosen?(3) %>><%= display_name(user.choice(3)) %></td>
-  </tr>
-<% end %>
-</table>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_project_path,
+            :class => 'btn btn-primary' %>

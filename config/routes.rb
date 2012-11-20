@@ -1,12 +1,12 @@
 GroupMaker::Application.routes.draw do
 
-  root to: 'projects#index'
+  root to: 'projects#index', as: :projects, via: :get
   
   devise_for :users
 
   resources :users
 
-  resources :projects
+  resources :projects, except: [:index]
 
   resources :project_choices
 
