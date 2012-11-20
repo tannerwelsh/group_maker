@@ -11,7 +11,7 @@ class ProjectChoice < ActiveRecord::Base
   # FIXME: This is not working
   # validates :project_id,  uniqueness: { scope: :user_id } 
   # validates :priority,    uniqueness: { scope: :user_id }
-  validates :priority,    inclusion:  { :in => [1,2,3] }
+  validates :priority,    inclusion:  { in: PRIORITIES }
 
   def weighted_interest
     # Numeral to give the priorities given greater weight
