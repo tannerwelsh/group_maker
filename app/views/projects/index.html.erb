@@ -1,20 +1,22 @@
-<%- model_class = Project -%>
-
 <div class="row-fluid">
-  <div id="project_list" class="span6">
+  <div id="project_list" class="span5 well">
     <h1>
-      <%=t '.title', :default => model_class.model_name.human.pluralize %>
-      <%= link_to t('.new', :default => t("helpers.links.new")),
-                  new_project_path,
-                  :class => 'btn btn-primary' %>
+      Projects
+      <%= link_to "New Project", new_project_path, :class => 'btn btn-primary' %>
     </h1>
 
     <%= render 'list', projects: @projects %>
   </div>
 
-  <div id="users_list" class="span6">
+  <div id="users_list" class="span7">
+    <h1>
+      Choices
+    </h1>
+
     <% if user_signed_in? %>
+      <hr>
       <%= render 'users/choices_form' %>
+      <hr>
     <% end %>
 
     <%= render 'users/list', users: @users %>  

@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <h3><%= "Choices for #{@user}" %></h3>
+  <h4><%= "Make your selection, #{@user}" %></h4>
 
   <%= f.fields_for :choices do |cf| %>
     <div class="field">
@@ -24,6 +24,6 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit class: 'btn' %>
+    <%= f.submit class: 'btn', value: 'Submit Choices' %>
   </div>
 <% end %>

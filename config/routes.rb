@@ -6,7 +6,7 @@ GroupMaker::Application.routes.draw do
 
   resources :projects, except: [:index]
 
-  match 'users/:id' => 'user#update', as: :user, via: :put
+  match 'users/:id' => 'users#update', as: :user, via: :put
   match 'users' => 'projects#index'
 
   # The priority is based upon order of creation:
