@@ -6,3 +6,7 @@ tr.unchosen {
 td.highlight { 
   color: #0F0;
 }
+
+#users_list .user_name {
+  font-weight: bold;
+}

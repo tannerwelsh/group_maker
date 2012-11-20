@@ -1,9 +1,11 @@
 class ProjectsController < ApplicationController
+  before_filter :generate_empty_choices, only: [:index]
+
   # GET /projects
   # GET /projects.json
   def index
     @projects = Project.sorted_by_popularity
-    @users    = User.alphabetical.includes(:choices)
+    @users    = User.alphabetized.includes(:choices)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -79,6 +81,14 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url }
       format.json { head :no_content }
+    end
+  end
+
+private
+  
+  def generate_empty_choices
+    if user_signed_in? && !current_user.has_choices?
+      current_user.generate_empty_choices
     end
   end
 end

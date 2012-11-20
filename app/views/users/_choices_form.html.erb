@@ -1,0 +1,29 @@
+<%= form_for(@user ||= current_user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this project_choice from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3><%= "Choices for #{@user}" %></h3>
+
+  <%= f.fields_for :choices do |cf| %>
+    <div class="field">
+      <%= enumerated_choice_label(cf) %>
+      <%= cf.select :project_id,
+             options_from_collection_for_select(alphabetized_by_name(@projects), :id, :name, project_id_for(cf)) %>
+      
+      <%= cf.hidden_field :priority %>
+    </div>  
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit class: 'btn' %>
+  </div>
+<% end %>

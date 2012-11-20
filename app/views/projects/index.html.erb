@@ -1,16 +1,22 @@
 <%- model_class = Project -%>
 
-<div class="page-header">
-  <h1>
-    <%=t '.title', :default => model_class.model_name.human.pluralize %>
-    <%= link_to t('.new', :default => t("helpers.links.new")),
-                new_project_path,
-                :class => 'btn btn-primary' %>
-  </h1>
-</div>
-
 <div class="row-fluid">
-  <%= render partial: 'projects/list', locals: { projects: @projects } %>
+  <div id="project_list" class="span6">
+    <h1>
+      <%=t '.title', :default => model_class.model_name.human.pluralize %>
+      <%= link_to t('.new', :default => t("helpers.links.new")),
+                  new_project_path,
+                  :class => 'btn btn-primary' %>
+    </h1>
 
-  <%= render partial: 'users/list', locals: { users: @users } %>  
+    <%= render 'list', projects: @projects %>
+  </div>
+
+  <div id="users_list" class="span6">
+    <% if user_signed_in? %>
+      <%= render 'users/choices_form' %>
+    <% end %>
+
+    <%= render 'users/list', users: @users %>  
+  </div>
 </div>

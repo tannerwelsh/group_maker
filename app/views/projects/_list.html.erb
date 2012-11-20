@@ -1,20 +1,18 @@
 <%- model_class = Project -%>
 
-<div id="project_list" class="span6">
-  <table class="table table-striped">
-    <thead>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:creator_name) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% projects.each do |project| %>
       <tr>
-        <th><%= model_class.human_attribute_name(:name) %></th>
-        <th><%= model_class.human_attribute_name(:creator_name) %></th>
+        <td><%= project.name %></td>
+        <td><%= project.creator_name %></td>
       </tr>
-    </thead>
-    <tbody>
-      <% projects.each do |project| %>
-        <tr>
-          <td><%= project.name %></td>
-          <td><%= project.creator_name %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+    <% end %>
+  </tbody>
+</table>
