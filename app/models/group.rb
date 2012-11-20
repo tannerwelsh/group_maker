@@ -18,10 +18,6 @@ class Group
     @project.creator
   end
 
-  def high_interest?
-    @choices.select(&:first_choice?).count >= 4
-  end
-
   def next_member
     return nil if @choices.empty?
     @choices.sort_by!(&:priority)

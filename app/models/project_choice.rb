@@ -22,16 +22,4 @@ class ProjectChoice < ActiveRecord::Base
     user.has_project?
   end
 
-  def first_choice?
-    priority == 1
-  end
-
-  def second_choice?
-    priority == 2
-  end
-
-  def third_choice?
-    priority == 3
-  end
-
 end
