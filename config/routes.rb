@@ -1,14 +1,12 @@
 GroupMaker::Application.routes.draw do
 
-  root to: 'projects#index', as: :projects, via: :get
+  root to: 'projects#index', via: :get
   
   devise_for :users
 
-  resources :users
-
   resources :projects, except: [:index]
 
-  resources :project_choices
+  match 'users/:id' => 'user#update', as: :user, via: :put
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
