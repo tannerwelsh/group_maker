@@ -36,12 +36,12 @@ class User < ActiveRecord::Base
     tap { |u| u.project = nil }.save!
   end
 
-  def choice(n)
-    choices.detect { |choice| choice.priority == n }
+  def choice(priority)
+    choices.detect { |choice| choice.priority == priority }
   end
 
-  def chosen?(n)
-    choice(n) && choice(n).project == self.project
+  def chosen?(priority)
+    choice(priority) && choice(priority).project == self.project
   end
 
 end
