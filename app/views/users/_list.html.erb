@@ -1,0 +1,24 @@
+<%- model_class = User -%>
+
+<div id="users_list" class="span6">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:name) %></th>
+        <th>First Choice</th>
+        <th>Second Choice</th>
+        <th>Third Choice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= choice_project_title(user, 1) %></td>
+          <td><%= choice_project_title(user, 2) %></td>
+          <td><%= choice_project_title(user, 3) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,4 +1,5 @@
 <%- model_class = Project -%>
+
 <div class="page-header">
   <h1>
     <%=t '.title', :default => model_class.model_name.human.pluralize %>
@@ -9,46 +10,7 @@
 </div>
 
 <div class="row-fluid">
-  <div id="project_list" class="span6">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><%= model_class.human_attribute_name(:name) %></th>
-          <th><%= model_class.human_attribute_name(:creator_name) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @projects.each do |project| %>
-          <tr>
-            <td><%= project.name %></td>
-            <td><%= project.creator_name %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  <%= render partial: 'projects/list', locals: { projects: @projects } %>
 
-  <div id="users_list" class="span6">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><%= model_class.human_attribute_name(:name) %></th>
-          <th>First Choice</th>
-          <th>Second Choice</th>
-          <th>Third Choice</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td><%= user.name %></td>
-            <td><%= choice_project_title(user, 1) %></td>
-            <td><%= choice_project_title(user, 2) %></td>
-            <td><%= choice_project_title(user, 3) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-
+  <%= render partial: 'users/list', locals: { users: @users } %>  
 </div>
