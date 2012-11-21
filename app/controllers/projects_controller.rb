@@ -5,9 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects            = Project.sorted_by_votes
-    @selectable_projects = ProjectsHelper.selectable_projects(@projects)
-    @users               = User.alphabetized.includes(:choices)
+    @projects = Project.includes(:members)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,6 +27,8 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   # GET /projects/new.json
   def new
+    return redirect_to root_path unless user_signed_in?
+
     @project = Project.new
     @users   = User.alphabetized
 

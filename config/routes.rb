@@ -1,6 +1,6 @@
 GroupMaker::Application.routes.draw do
 
-  root to: 'projects#index', via: :get
+  root to: 'pages#home', via: :get
   
   devise_for :users
 
@@ -9,11 +9,11 @@ GroupMaker::Application.routes.draw do
   end
 
   match 'users/:id' => 'users#update', as: :user, via: :put
-  match 'users' => 'projects#index'
+  match 'users'     => 'projects#index'
 
-  get 'admin' => 'admin#index'
-  post 'admin/toggle/:config' => 'admin#toggle', as: :toggle
-  post 'admin/make_groups' => 'admin#make_groups', as: :make_groups
+  get   'admin'                 => 'admin#index'
+  post  'admin/toggle/:config'  => 'admin#toggle', as: :toggle
+  post  'admin/make_groups'     => 'admin#make_groups', as: :make_groups
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -39,7 +39,7 @@ class Project < ActiveRecord::Base
   end
 
   def member_names
-    members.map(&:name)
+    members.map(&:name).join(' | ')
   end
 
   def creator_name
