@@ -4,7 +4,7 @@ GroupMaker::Application.routes.draw do
   
   devise_for :users
 
-  resources :projects, except: [:index] do
+  resources :projects do
     post 'upvote', on: :member
   end
 
@@ -13,6 +13,7 @@ GroupMaker::Application.routes.draw do
 
   get 'admin' => 'admin#index'
   post 'admin/toggle/:config' => 'admin#toggle', as: :toggle
+  post 'admin/make_groups' => 'admin#make_groups', as: :make_groups
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
