@@ -40,12 +40,16 @@ class Project < ActiveRecord::Base
     votes.size
   end
 
+  def choice_for(member)
+    choices.detect { |choice| choice.user == member } || 0
+  end
+
   def group_size
     members.count
   end
 
   def member_names
-    members.map(&:name).join(' | ')
+    members.map(&:name)
   end
 
   def creator_name

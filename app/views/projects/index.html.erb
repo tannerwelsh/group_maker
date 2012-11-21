@@ -6,6 +6,7 @@
       <thead>
         <tr>
           <th>Project</th>
+          <th>Lead</th>
           <th>Size</th>
           <th>Members</th>
         </tr>
@@ -14,8 +15,9 @@
         <% @projects.each do |project| %>
           <tr>
             <td><b><%= project.name %></b></td>
+            <td><%= project.creator_name %></td>
             <td><%= project.members.size %></td>
-            <td><%= project.member_names %></td>
+            <td><%= members_colorized_by_choice(project) %></td>
           </tr>
         <% end %>
       </tbody>

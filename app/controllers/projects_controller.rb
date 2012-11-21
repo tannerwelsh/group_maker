@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.includes(:members)
+    @projects = Project.includes(:members, :creator, :choices)
     @unpicked_users = User.needs_project
 
     respond_to do |format|

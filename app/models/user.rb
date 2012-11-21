@@ -29,7 +29,11 @@ class User < ActiveRecord::Base
   end
 
   def is_creator?
-    created_projects.count > 0
+    !created_projects.empty?
+  end
+
+  def is_member?(proj)
+    self.project == proj
   end
 
   def join_project(project)

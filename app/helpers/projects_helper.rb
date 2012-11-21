@@ -13,6 +13,16 @@ module ProjectsHelper
     percentage < 150 ? "#{percentage}%" : "Low interest"
   end
 
+  def members_colorized_by_choice(project)
+    html = project.members.map do |member|
+      css_class = class_for_priority(project.choice_for(member))
+
+      "<span class=\"#{css_class}\">#{member.name}</span>"
+    end.join(' | ')
+
+    return raw(html)
+  end
+
   def upvote_link(project)
     return nil unless user_signed_in? && Settings.voting
 

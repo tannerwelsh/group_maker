@@ -1,12 +1,6 @@
-tr.unchosen {
-  background-color: #C00;
-  color: #FFF;
-}
+.first_choice   { color: #1BC21B; }
+.second_choice  { color: #00B1C9; }
+.third_choice   { color: #BD9E21; }
+.no_choice      { color: #CCC; }
 
-td.highlight { 
-  color: #0F0;
-}
-
-#users_list .user_name {
-  font-weight: bold;
-}
+#users_list .user_name { font-weight: bold; }
