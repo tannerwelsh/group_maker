@@ -6,6 +6,7 @@
       <thead>
         <tr>
           <th>Project</th>
+          <th>Size</th>
           <th>Members</th>
         </tr>
       </thead>
@@ -13,6 +14,7 @@
         <% @projects.each do |project| %>
           <tr>
             <td><b><%= project.name %></b></td>
+            <td><%= project.members.size %></td>
             <td><%= project.member_names %></td>
           </tr>
         <% end %>
@@ -24,5 +26,9 @@
     <h2>Unpicked Users</h2>
 
     <%= render 'users/list', users: @unpicked_users %>
+
+    <hr>
+
+    <%= render 'projects/add_user_form' %>
   </div>
 </div>

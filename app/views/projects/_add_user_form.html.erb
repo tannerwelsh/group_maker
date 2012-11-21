@@ -1,0 +1,25 @@
+<h4>Add Members</h4>
+
+<%= form_for(:project, html: { class: 'form-horizontal' }) do |f| %>
+  <div class="control-group">
+    <%= f.label :project_id, class: 'control-label' %>
+    <div class="controls">
+      <%= f.select :project_id,
+            options_from_collection_for_select(selectable_projects(@projects), 
+            :id, :name, @projects.first.id) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :user_id, class: 'control-label' %>
+    <div class="controls">
+      <%= f.select :user_id,
+            options_from_collection_for_select(@unpicked_users, 
+            :id, :name, @unpicked_users.first.id) %>
+    </div>
+  </div>
+  
+  <div class="form-actions">
+    <%= f.submit value: 'Add User to Project', class: 'btn' %>
+  </div>
+<% end %>

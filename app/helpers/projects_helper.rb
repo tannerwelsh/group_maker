@@ -1,6 +1,10 @@
 module ProjectsHelper
-  def self.selectable_projects(projects)
-    projects[0...Settings.num_projects]
+  def selectable_projects(projects)
+    alphabetized_by_name(projects[0...Settings.num_projects])
+  end
+
+  def project_id_for(form)
+    form.object.project.id if form.object.project
   end
 
   def upvote_link(project)
