@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :creator_id
 
   has_many :members,    class_name: 'User'
   has_many :choices,    class_name: 'ProjectChoice'

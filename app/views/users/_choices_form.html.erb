@@ -21,7 +21,7 @@
       <%= enumerated_choice_label(cf) %>
       <div class="controls">
         <%= cf.select :project_id,
-             options_from_collection_for_select(alphabetized_by_name(@projects), :id, :name, project_id_for(cf)) %>
+             options_from_collection_for_select(alphabetized_by_name(@selectable_projects), :id, :name, project_id_for(cf)) %>
       
         <%= cf.hidden_field :priority %>
       </div>
