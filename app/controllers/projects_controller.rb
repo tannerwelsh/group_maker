@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.includes(:members)
+    @unpicked_users = User.needs_project
 
     respond_to do |format|
       format.html # index.html.erb

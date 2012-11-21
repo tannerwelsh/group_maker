@@ -1,20 +1,28 @@
 <div class="row-fluid">
-  <div id="projects">
-    <table id="projects_list" class="table table-striped">
+  <div id="projects" class="span6">
+    <h2>Project Groups</h2>
+
+    <table id="projects_with_members" class="table table-striped">
       <thead>
         <tr>
-          <th>Projects</th>
+          <th>Project</th>
           <th>Members</th>
         </tr>
       </thead>
       <tbody>
         <% @projects.each do |project| %>
           <tr>
-            <td><%= project.name %></td>
+            <td><b><%= project.name %></b></td>
             <td><%= project.member_names %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
+  </div>
+
+  <div id="unpicked_users" class="span6">
+    <h2>Unpicked Users</h2>
+
+    <%= render 'users/list', users: @unpicked_users %>
   </div>
 </div>
