@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :check_if_choices_allowed, only: [:update]
+
   # PUT /users/1
   # PUT /users/1.json
   def update
@@ -13,6 +15,12 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+private
+
+  def check_if_choices_allowed
+    redirect_to root_path unless ProjectChoice.new_allowed?
   end
 
 end

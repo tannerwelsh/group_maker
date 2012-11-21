@@ -9,7 +9,7 @@
   </div>
 
   <div id="users" class="span7">    
-    <% if user_signed_in? %>
+    <% if user_signed_in? && ProjectChoice.new_allowed? %>
       <%= render 'users/choices_form' %>
     <% end %>
   
