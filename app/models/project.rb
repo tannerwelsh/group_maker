@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
   end
 
   def group_size
-    members.size
+    members.count
   end
 
   def member_names
