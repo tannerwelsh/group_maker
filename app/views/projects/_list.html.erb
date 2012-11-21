@@ -3,8 +3,12 @@
 <table id="projects_list" class="table table-striped">
   <thead>
     <tr>
-      <th>Votes</th>
+      <th># Votes</th>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <% if Settings.choices %>
+        <th># of First Picks</th>
+        <th>Probability of Acceptance</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +19,10 @@
           <span style="float:right;"><%= upvote_link(project) %></span>
         </td>
         <td><%= project.name %></td>
+        <% if Settings.choices %>
+          <td><%= project.interest_by_priority(1) %></td>
+          <td><%= probability_indicator(project) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

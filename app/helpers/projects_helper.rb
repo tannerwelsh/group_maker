@@ -7,6 +7,12 @@ module ProjectsHelper
     form.object.project.id if form.object.project
   end
 
+  def probability_indicator(project)
+    percentage = project.probability_for_acceptance
+
+    percentage < 150 ? "#{percentage}%" : "Low interest"
+  end
+
   def upvote_link(project)
     return nil unless user_signed_in? && Settings.voting
 

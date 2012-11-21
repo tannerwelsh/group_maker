@@ -30,6 +30,10 @@ class Project < ActiveRecord::Base
     choices.with_priority(priority).size
   end
 
+  def probability_for_acceptance
+    ((GroupList::GROUP_SIZE / interest_by_priority(1).to_f) * 100).round(2)
+  end
+
   def vote_count
     votes.size
   end
