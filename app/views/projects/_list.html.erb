@@ -1,17 +1,20 @@
 <%- model_class = Project -%>
 
-<table class="table table-striped">
+<table id="projects_list" class="table table-striped">
   <thead>
     <tr>
+      <th>Votes</th>
       <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:creator_name) %></th>
     </tr>
   </thead>
   <tbody>
-    <% projects.each do |project| %>
+    <% @projects.each do |project| %>
       <tr>
+        <td>
+          <%= project.vote_count %> 
+          <span style="float:right;"><%= upvote_link(project) %></span>
+        </td>
         <td><%= project.name %></td>
-        <td><%= project.creator_name %></td>
       </tr>
     <% end %>
   </tbody>

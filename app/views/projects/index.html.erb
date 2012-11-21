@@ -1,21 +1,20 @@
 <div class="row-fluid">
-  <div id="project_list" class="span5 well">
+  <div id="projects" class="span5 well">
     <h1>
       Projects
       <%= link_to "New Project", new_project_path, :class => 'btn btn-primary' %>
     </h1>
 
-    <%= render 'list', projects: @projects %>
+    <%= render 'list' %>
   </div>
 
-  <div id="users_list" class="span7">
-    <h1>Choices</h1>
-    
+  <div id="users" class="span7">    
     <% if user_signed_in? %>
-      <hr>
       <%= render 'users/choices_form' %>
     <% end %>
   
+    <h2>Choices</h2>
+
     <%= render 'users/list', users: @users %>  
   </div>
 </div>
