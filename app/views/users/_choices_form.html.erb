@@ -1,4 +1,4 @@
-<%= form_for(@user ||= current_user, html: { id: 'project_choices_form', class: 'form-horizontal' }) do |f| %>
+<%= form_for(@user ||= current_user, html: { id: 'project_choices_form' }) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this project_choice from being saved:</h2>
@@ -11,21 +11,20 @@
     </div>
   <% end %>
 
-  <h4><%= "Make your selection, #{@user}" %></h4>
+  <h5><%= "Choose wisely, #{@user}" %></h5>
   <br>
 
   <div id="js_validation_errors" class="alert alert-failure"></div>
 
   <%= f.fields_for :choices do |cf| %>
-    <div class="control-group">
+    <div class="form-inline">
       <%= enumerated_choice_label(cf) %>
-      <div class="controls">
-        <%= cf.select :project_id,
-             options_from_collection_for_select(alphabetized_by_name(@selectable_projects), :id, :name, project_id_for(cf)) %>
-      
-        <%= cf.hidden_field :priority %>
-      </div>
+      <%= cf.select :project_id,
+           options_from_collection_for_select(alphabetized_by_name(@selectable_projects), :id, :name, project_id_for(cf)) %>
+    
+      <%= cf.hidden_field :priority %>
     </div>
+    <br>
   <% end %>
 
   <div class="form-actions">
