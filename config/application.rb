@@ -66,14 +66,9 @@ module GroupMaker
     config.assets.version = '1.0'
 
     # Allow users to vote on projects
-    config.permit_voting_on_projects = true
+    config.permit_voting = true
 
     # Allow users to make their choice selection on projects
-    config.permit_project_choices = true
-
-    CUSTOM_CONFIG = {
-      'voting'  => true, 
-      'choices' => true
-    }
+    config.permit_choices = false
   end
 end

@@ -1,18 +1,22 @@
 class Settings
+  CONFIG_OPTIONS = [:voting, :choices]
+
   def self.config
-    GroupMaker::Application::CUSTOM_CONFIG
+    Hash[CONFIG_OPTIONS.map do |option|
+      [option.to_s, self.send(option)]
+    end]
   end
 
-  def self.method_missing(method)
-    GroupMaker::Application::CUSTOM_CONFIG[method.to_s]
+  def self.method_missing(option, *args)
+    GroupMaker::Application.config.send("permit_#{option}", *args)
   end
 
   def self.set!(option, value)
-    GroupMaker::Application::CUSTOM_CONFIG[option] = value
+    self.send("#{option}=", value)
   end
 
   def self.toggle!(option)
-    self.set!(option, !GroupMaker::Application::CUSTOM_CONFIG[option])
+    self.set!(option, !Settings.send(option))
   end
 
   def self.num_projects
