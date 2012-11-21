@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
 
   def index
-    @settings = Settings::CONFIG
+    @settings = Settings.config
   end
 
   def toggle
