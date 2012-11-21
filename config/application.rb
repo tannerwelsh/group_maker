@@ -64,5 +64,8 @@ module GroupMaker
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Allow voting on particular models
+    config.permit_voting_on_projects = true
   end
 end

@@ -8,7 +8,8 @@ module ProjectsHelper
   end
 
   def upvote_link(project)
-    return nil unless user_signed_in?
+    return nil unless user_signed_in? && Project.voting_allowed?
+
     unless current_user.voted_on? project
       link_to raw('<i class="icon-arrow-up"></i>'), upvote_project_path(project), method: :post, remote: true
     else

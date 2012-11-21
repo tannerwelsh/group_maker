@@ -7,6 +7,10 @@ class Project < ActiveRecord::Base
 
   acts_as_votable
 
+  def self.voting_allowed?
+    GroupMaker::Application.config.permit_voting_on_projects
+  end
+
   def self.sorted_by_votes
     includes(:votes).sort_by(&:vote_count).reverse
   end

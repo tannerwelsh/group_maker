@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_filter :generate_empty_choices, only: [:index]
+  before_filter :check_if_voting_allowed, only: [:upvote]
 
   # GET /projects
   # GET /projects.json
@@ -105,5 +106,9 @@ private
     if user_signed_in? && !current_user.has_choices?
       current_user.generate_empty_choices
     end
+  end
+
+  def check_if_voting_allowed
+    redirect_to root_path, notice: 'Voting is closed.' unless Project.voting_allowed?
   end
 end
