@@ -39,8 +39,18 @@ namespace :demo do
 
         ProjectChoice::PRIORITIES.each do |priority|
           next unless user.choice(priority).nil?
+
+          unpicked_created_projects = sample_projects & user.created_projects
           
-          ProjectChoice.create(user_id: user.id, project_id: sample_projects.pop.id, priority: priority)
+          if user.is_creator? && !unpicked_created_projects.empty?
+            project = unpicked_created_projects.sample(1).first
+
+            sample_projects.reject! { |proj| proj.id == project.id }
+          else
+            project = sample_projects.pop
+          end
+          
+          ProjectChoice.create(user_id: user.id, project_id: project.id, priority: priority)
         end
       end
     end

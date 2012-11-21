@@ -40,31 +40,34 @@ private
   end
 
   def project_from_group(group)
-    creator = group.project_creator
-    group.remove!(creator)
-    
-    users = [ creator ] + select_users(group)
-
-    users.each { |user| user.join_project(group.project) }
+    select_users(group).each { |user| user.join_project(group.project) }
   end
 
   def select_users(group)
-    (GROUP_SIZE - 1).times.map do
+    (GROUP_SIZE).times.map do
       user_from_group(group)
     end.reject(&:nil?)
   end
 
   def user_from_group(group)
-    if group.users.any? { |user| stack_users.include? user }
-      user = select_from_stack(group.users)
+    if group.users.any? { |user| user == group.project_creator }
+      user = group.project_creator
+      pull_user(group, user)
       
-      remove_from_stack!(user)
-      group.remove!(user)
-
       return user
+    elsif group.users.any? { |user| stack_users.include? user }
+      user = select_from_stack(group.users)
+      pull_user(group, user)
+      
+      return user
+    else
+      return group.next_member
     end
+  end
 
-    group.next_member
+  def pull_user(group, user)
+    remove_from_stack!(user)
+    group.remove!(user)
   end
 
   def nullify_small_groups
