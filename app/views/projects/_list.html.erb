@@ -18,7 +18,7 @@
           <%= project.vote_count %> 
           <span style="float:right;"><%= upvote_link(project) %></span>
         </td>
-        <td><%= project.name %></td>
+        <td class="project_name"><%= project.name %></td>
         <% if Settings.choices %>
           <td><%= project.interest_by_priority(1) %></td>
           <td><%= probability_indicator(project) %></td>

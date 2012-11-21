@@ -14,7 +14,7 @@
       <tbody>
         <% @projects.each do |project| %>
           <tr>
-            <td><b><%= project.name %></b></td>
+            <td class="project_name"><%= project.name %></td>
             <td><%= project.creator_name %></td>
             <td><%= project.members.size %></td>
             <td><%= members_colorized_by_choice(project) %></td>

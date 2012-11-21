@@ -1,6 +1,11 @@
-.first_choice   { color: #1BC21B; }
-.second_choice  { color: #00B1C9; }
-.third_choice   { color: #BD9E21; }
+.first_choice   { font-weight: bold; color: #000; }
+.second_choice  { font-style: italic; color: #555; }
+.third_choice   { color: #999; }
 .no_choice      { color: #CCC; }
+
+.project_name   { 
+  text-shadow: 1px 1px 1px #CCC;
+  filter: dropshadow(color=#CCC, offx=1, offy=1);
+}
 
 #users_list .user_name { font-weight: bold; }

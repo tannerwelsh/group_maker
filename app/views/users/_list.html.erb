@@ -14,9 +14,9 @@
       <% next unless user.has_choices? %>
       <tr>
         <td class="user_name"><%= user.name %></td>
-        <td><%= display_name(user.choice(1)) %></td>
-        <td><%= display_name(user.choice(2)) %></td>
-        <td><%= display_name(user.choice(3)) %></td>
+        <td class="project_name"><%= display_name(user.choice(1)) %></td>
+        <td class="project_name"><%= display_name(user.choice(2)) %></td>
+        <td class="project_name"><%= display_name(user.choice(3)) %></td>
       </tr>
     <% end %>
   </tbody>
