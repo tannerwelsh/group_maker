@@ -1,4 +1,4 @@
-class SettingsController < ApplicationController
+class AdminController < ApplicationController
 
   def index
     @settings = Settings::CONFIG

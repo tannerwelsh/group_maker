@@ -11,8 +11,8 @@ GroupMaker::Application.routes.draw do
   match 'users/:id' => 'users#update', as: :user, via: :put
   match 'users' => 'projects#index'
 
-  get 'admin' => 'settings#index'
-  post 'admin/toggle/:config' => 'settings#toggle', as: :toggle
+  get 'admin' => 'admin#index'
+  post 'admin/toggle/:config' => 'admin#toggle', as: :toggle
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
