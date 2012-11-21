@@ -4,7 +4,9 @@ GroupMaker::Application.routes.draw do
   
   devise_for :users
 
-  resources :projects, except: [:index]
+  resources :projects, except: [:index] do
+    post 'upvote', on: :member
+  end
 
   match 'users/:id' => 'users#update', as: :user, via: :put
   match 'users' => 'projects#index'

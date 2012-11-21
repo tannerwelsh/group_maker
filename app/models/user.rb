@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many    :choices,           class_name: 'ProjectChoice'
   has_many    :created_projects,  class_name: 'Project', foreign_key: :creator_id
 
+  acts_as_voter
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :password, :password_confirmation, :remember_me, :choices_attributes
 

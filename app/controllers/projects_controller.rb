@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.sorted_by_popularity
+    @projects = Project.sorted_by_votes
     @users    = User.alphabetized.includes(:choices)
 
     respond_to do |format|
@@ -82,6 +82,19 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url }
       format.json { head :no_content }
+    end
+  end
+
+  def upvote
+    @project = Project.find(params[:id])
+    @project.vote voter: current_user
+
+    @projects = Project.sorted_by_votes
+
+    respond_to do |format|
+      format.js   { render 'upvote'}
+      format.html { redirect_to projects_url }
+      format.json { render json: @project }
     end
   end
 
