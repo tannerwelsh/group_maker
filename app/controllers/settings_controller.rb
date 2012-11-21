@@ -1,20 +1,12 @@
 class SettingsController < ApplicationController
 
   def index
-    @settings = {
-      voting:  Settings.permit_voting,
-      choices: Settings.permit_choices
-    }
+    @settings = Settings::CONFIG
   end
 
   def toggle
-    case params[:config]
-    when 'voting'
-      Settings.permit_voting = !Settings.permit_voting
-    when 'choices'  
-      Settings.permit_choices = !Settings.permit_choices
-    end
-
+    Settings.toggle!(params[:config])
+    
     redirect_to action: 'index'
   end
 

@@ -1,21 +1,22 @@
 class Settings
-  def self.num_of_allowed_projects
+  CONFIG = { 
+    'voting'  => true, 
+    'choices' => true
+  }
+
+  def self.method_missing(method)
+    CONFIG[method.to_s]
+  end
+
+  def self.set!(option, value)
+    CONFIG[option] = value
+  end
+
+  def self.toggle!(option)
+    self.set!(option, !CONFIG[option])
+  end
+
+  def self.num_projects
     (User.count / GroupList::GROUP_SIZE) + 2
-  end
-
-  def self.permit_voting
-    GroupMaker::Application.config.permit_voting_on_projects
-  end
-
-  def self.permit_voting=(bool)
-    GroupMaker::Application.config.permit_voting_on_projects = bool
-  end
-
-  def self.permit_choices
-    GroupMaker::Application.config.permit_project_choices
-  end
-
-  def self.permit_choices=(bool)
-    GroupMaker::Application.config.permit_project_choices = bool
   end
 end

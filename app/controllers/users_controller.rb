@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 private
 
   def check_if_choices_allowed
-    redirect_to root_path unless Settings.permit_choices
+    redirect_to root_path unless Settings.choices
   end
 
 end
