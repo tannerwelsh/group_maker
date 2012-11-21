@@ -5,6 +5,8 @@ class Project < ActiveRecord::Base
   has_many :choices,    class_name: 'ProjectChoice'
   belongs_to :creator,  class_name: 'User'
 
+  validates :name, uniqueness: true
+
   acts_as_votable
 
   def self.sorted_by_votes
