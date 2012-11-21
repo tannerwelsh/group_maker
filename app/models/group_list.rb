@@ -78,7 +78,7 @@ private
   end
 
   def select_from_stack(users)
-    (users & @priority_stack[@current_priority]).sample
+    (users & @priority_stack[@current_priority]).sample(1).first
   end
 
   def remove_from_stack!(user)

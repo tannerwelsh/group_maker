@@ -35,14 +35,12 @@ namespace :demo do
       projects = Project.all
 
       User.all.each do |user|
-        1.upto(3) do |priority|
-          next if user.choices.map(&:priority).include? priority
+        sample_projects = projects.dup.shuffle
 
-          begin
-            project = projects.sample
-          end until user.choices.all? { |choice| choice.project.id != project.id }
+        ProjectChoice::PRIORITIES.each do |priority|
+          next unless user.choice(priority).nil?
           
-          ProjectChoice.create(user_id: user.id, project_id: project.id, priority: priority)
+          ProjectChoice.create(user_id: user.id, project_id: sample_projects.pop.id, priority: priority)
         end
       end
     end
