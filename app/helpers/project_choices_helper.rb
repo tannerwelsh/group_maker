@@ -4,7 +4,7 @@ module ProjectChoicesHelper
   end
 
   def enumerated_choice_label(form)
-    form.label :project_id, 'Project Choice #' + form.object.priority.to_s
+    form.label :project_id, "Project Choice #{form.object.priority.to_s}", class: 'control-label'
   end
 
   def project_id_for(form)

@@ -9,16 +9,13 @@
   </div>
 
   <div id="users_list" class="span7">
-    <h1>
-      Choices
-    </h1>
-
+    <h1>Choices</h1>
+    
     <% if user_signed_in? %>
       <hr>
       <%= render 'users/choices_form' %>
-      <hr>
     <% end %>
-
+  
     <%= render 'users/list', users: @users %>  
   </div>
 </div>
