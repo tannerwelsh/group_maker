@@ -11,10 +11,19 @@ class UsersController < ApplicationController
         format.html { redirect_to root_path, notice: 'Update successful.' }
         format.json { head :no_content }
       else
-        format.html { render template: 'projects/index' }
+        format.html { render template: 'pages/home' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def join_project
+    @user     = User.find(params[:user_id])
+    @project  = Project.find(params[:project_id])
+
+    @user.join_project(@project)
+
+    redirect_to projects_path
   end
 
 private

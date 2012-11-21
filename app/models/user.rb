@@ -37,11 +37,11 @@ class User < ActiveRecord::Base
   end
 
   def join_project(project)
-    tap { |u| u.project = project }.save!
+    tap { |user| user.project = project }.save!
   end
 
   def leave_project!
-    tap { |u| u.project = nil }.save!
+    tap { |user| user.project = nil }.save!
   end
 
   def has_choices?

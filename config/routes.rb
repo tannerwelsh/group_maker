@@ -8,8 +8,9 @@ GroupMaker::Application.routes.draw do
     post 'upvote', on: :member
   end
 
-  match 'users/:id' => 'users#update', as: :user, via: :put
-  match 'users'     => 'projects#index'
+  put   'users/:id' => 'users#update', as: :user
+  get   'users'     => 'projects#index'
+  post  'users/join_project' => 'users#join_project', as: 'join_project'
 
   get   'admin'                 => 'admin#index'
   post  'admin/toggle/:config'  => 'admin#toggle', as: :toggle

@@ -65,15 +65,13 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
 
-    respond_to do |format|
-      if @project.update_attributes(params[:project])
-        format.html { redirect_to root_path, notice: 'Project was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if user_id = params[:add_member_id]
+      User.find(user_id).join_project(@project)
+    else
+      @project.update_attributes(params[:project])
     end
+
+    redirect_to root_path
   end
 
   # DELETE /projects/1
