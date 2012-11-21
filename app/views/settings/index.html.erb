@@ -1,0 +1,10 @@
+<h1>Admin Settings</h1>
+
+<div id="settings">
+  <% @settings.keys.each do |config| %>
+    <div class="setting_config">
+      <%= toggle_link_for(config) %>
+    </div>
+    <br>
+  <% end %>
+</div>

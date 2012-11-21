@@ -109,6 +109,6 @@ private
   end
 
   def check_if_voting_allowed
-    redirect_to root_path, notice: 'Voting is closed.' unless Project.voting_allowed?
+    redirect_to root_path, notice: 'Voting is closed.' unless Settings.permit_voting
   end
 end

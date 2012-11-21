@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div id="projects" class="span4 well">
-    <% if user_signed_in? && ProjectChoice.new_allowed? %>
+    <% if user_signed_in? && Settings.permit_choices %>
       <%= render 'users/choices_form' %>
     <% end %>
 

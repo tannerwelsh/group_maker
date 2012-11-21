@@ -13,10 +13,6 @@ class ProjectChoice < ActiveRecord::Base
   # validates :priority,    uniqueness: { scope: :user_id }
   validates :priority,    inclusion:  { in: PRIORITIES }
 
-  def self.new_allowed?
-    GroupMaker::Application.config.permit_project_choices
-  end
-
   def weighted_interest
     # Numeral to give the priorities given greater weight
     (priority - (PRIORITIES.count + 1)).abs * 10
