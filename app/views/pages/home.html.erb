@@ -13,6 +13,13 @@
   </div>
 
   <div id="users" class="span8">
+    <% if @user_project %>
+      <div class="alert alert-success">
+        <h3><i>Congratulations! You've been selected for:</i> <%= @user_project.name %></h3>
+        <p>Your Teammates: <%= @user_project.member_names.join(', ') %></p>
+      </div>
+    <% end %>
+
     <h2>Choices</h2>
 
     <%= render 'users/list', users: @users %>  
