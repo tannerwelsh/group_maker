@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'debugger'
 
 gem 'devise'
+gem 'cancan'
 
 gem 'acts_as_votable', '~> 0.4.0'
 
