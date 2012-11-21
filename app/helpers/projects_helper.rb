@@ -15,7 +15,11 @@ module ProjectsHelper
 
   def members_colorized_by_choice(project)
     html = project.members.map do |member|
-      css_class = class_for_priority(project.choice_for(member))
+      if member == project.creator
+        css_class = 'project_creator'
+      else
+        css_class = class_for_priority(project.choice_for(member))
+      end
 
       "<span class=\"#{css_class}\">#{member.name}</span>"
     end.join(' | ')
