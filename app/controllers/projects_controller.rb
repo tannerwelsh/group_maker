@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.json
   def new
     @project = Project.new
+    @users   = User.alphabetized
 
     respond_to do |format|
       format.html # new.html.erb
