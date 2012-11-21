@@ -28,7 +28,8 @@ end
 
 gem 'jquery-rails'
 
-group :test do
+group :development, :test do
+  gem 'quiet_assets'
   gem 'rspec-rails'
 end
 
