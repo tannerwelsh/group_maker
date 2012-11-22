@@ -3,10 +3,25 @@ namespace :demo do
   namespace :build do
     desc "Drop & rebuild db; populate with users, projects, choices; make groups"
     task :all => :environment do
-      %w{ db:schema:load db:seed demo:build:projects demo:build:choices }.each do |task|
+      %w{ db:schema:load demo:build:students demo:build:projects demo:build:choices }.each do |task|
         puts "Invoking #{task}..."
         Rake::Task[task].invoke  
       end
+    end
+
+    desc "Populate the database with sample students"
+    task :students => :environment do
+      require 'csv'
+
+      STUDENT_FILE = File.dirname(__FILE__) + '/../assets/students.csv'
+
+      # Generate students
+      CSV.read(STUDENT_FILE).each_with_index do |row, index|
+        next if index == 0 || row.empty?
+        student = User.create! name: row[0], email: row[1], password: "candybar"
+        student.update_attribute(:role, "student")
+      end
+
     end
     
     desc "Populate the database with demo projects"
