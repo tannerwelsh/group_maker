@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :choices
 
   scope :has_project,   where('project_id IS NOT NULL')
-  scope :needs_project, where(project_id: nil)
+  scope :needs_project, students.where(project_id: nil)
   scope :alphabetized,  order(:name)
 
 

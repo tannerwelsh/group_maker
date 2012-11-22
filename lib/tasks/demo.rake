@@ -17,7 +17,7 @@ namespace :demo do
 
       require 'csv'
       CSV.read(DEMO_PROJECTS_FILE).each_with_index do |row, index|
-        next if index == 0
+        next if index == 0 || row.empty?
         project_name, project_lead_name = row
 
         creator = User.find_by_name(project_lead_name)
