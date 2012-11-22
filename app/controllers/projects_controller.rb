@@ -27,8 +27,6 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   # GET /projects/new.json
   def new
-    return redirect_to root_path unless user_signed_in?
-
     @project = Project.new
     @users   = User.alphabetized
 
@@ -53,6 +51,7 @@ class ProjectsController < ApplicationController
         format.html { redirect_to root_path, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
+        @users = User.alphabetized
         format.html { render action: "new" }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end

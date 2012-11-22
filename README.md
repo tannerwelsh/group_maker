@@ -29,10 +29,6 @@ To run the group generator algorithm, press the `Make Groups` button in `/admin/
 
 ### Issues
 
-*Pending*
-
-- More validations
-
 *Complete*
 
 - Ensure that project creators get chosen
