@@ -26,13 +26,3 @@ To quickly generate demo data, run `bundle exec rake demo:build:all`.  This will
 If you login as the admin user, you have control over the flow of the app.  The `/admin` page gives you the ability to allow/disallow voting and choosing of projects, as well as other options.
 
 To run the group generator algorithm, press the `Make Groups` button in `/admin/index` or run `GroupList.generate!` from the console.
-
-### Issues
-
-*Complete*
-
-- Ensure that project creators get chosen
-- Better visual data
-- Fix form to add unpicked users
-- Add authorization layer
-- Add toggle for displaying final project group info
