@@ -11,8 +11,6 @@ class User < ActiveRecord::Base
   has_many    :choices,           class_name: 'ProjectChoice'
   has_many    :created_projects,  class_name: 'Project', foreign_key: :creator_id
 
-  scope :students, where(role: 'student')
-
   acts_as_voter
 
   # Setup accessible (or protected) attributes for your model
@@ -20,8 +18,9 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :choices
 
-  scope :has_project,   where('project_id IS NOT NULL')
-  scope :needs_project, students.where(project_id: nil)
+  scope :students,      where(role: 'student')
+  scope :has_project,   students.where('project_id IS NOT NULL')
+  scope :needs_project, students.where('project_id IS NULL')
   scope :alphabetized,  order(:name)
 
 
