@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
     return redirect_to root_path unless user_signed_in?
 
     @project = Project.new
-    @users   = User.students.alphabetized
+    @users   = User.alphabetized
 
     respond_to do |format|
       format.html # new.html.erb
