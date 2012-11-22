@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <div id="projects" class="span4 well">
-    <% if user_signed_in? && Settings.choices %>
+    <% if user_signed_in? && can?(:update, ProjectChoice) %>
       <%= render 'users/choices_form' %>
     <% end %>
 

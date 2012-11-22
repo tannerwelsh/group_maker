@@ -1,4 +1,4 @@
-<%= form_for(@user ||= current_user, html: { id: 'project_choices_form' }) do |f| %>
+<%= form_for(@user, html: { id: 'project_choices_form' }) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this project_choice from being saved:</h2>

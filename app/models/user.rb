@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  ROLES = %w[ admin student ]
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -19,6 +21,12 @@ class User < ActiveRecord::Base
   scope :has_project,   where('project_id IS NOT NULL')
   scope :needs_project, where(project_id: nil)
   scope :alphabetized,  order(:name)
+
+
+  def is?(role)
+    self.role == role.to_s
+  end
+
 
   def needs_project?
     project.nil?
@@ -44,14 +52,9 @@ class User < ActiveRecord::Base
     tap { |user| user.project = nil }.save!
   end
 
+
   def has_choices?
     choices.any?
-  end
-
-  def generate_empty_choices
-    ProjectChoice::PRIORITIES.each do |priority|
-      choices.build(priority: priority)
-    end
   end
 
   def choice(priority)
@@ -60,6 +63,12 @@ class User < ActiveRecord::Base
 
   def chosen?(priority)
     choice(priority) && choice(priority).project == self.project
+  end
+
+  def load_choices
+    ProjectChoice::PRIORITIES.map do |priority|
+      choice(priority) || choices.build(priority: priority)
+    end
   end
 
   def to_s
