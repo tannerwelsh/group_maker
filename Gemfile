@@ -5,9 +5,6 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-gem 'debugger'
-
 gem 'devise'
 gem 'cancan'
 
@@ -30,6 +27,7 @@ end
 gem 'jquery-rails'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'quiet_assets'
   gem 'rspec-rails'
 end
@@ -47,4 +45,4 @@ end
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
