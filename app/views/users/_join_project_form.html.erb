@@ -1,27 +1,32 @@
 <h4>Join Project</h4>
 
-<%= form_tag join_project_path, method: :post, class: 'form-horizontal' do %>
+<% if @projects.empty? %>
+  <p>There are no projects yet.  Please go create some.</p>
+<% else %>
 
+  <%= form_tag join_project_path, method: :post, class: 'form-horizontal' do %>
 
-  <div class="control-group">
-    <%= label_tag :project_id, nil, class: 'control-label' %>
-    <div class="controls">
-      <%= select_tag :project_id,
-            options_from_collection_for_select(selectable_projects(@projects), 
-            :id, :name, @projects.first.id) %>
+    <div class="control-group">
+      <%= label_tag :project_id, nil, class: 'control-label' %>
+      <div class="controls">
+        <%= select_tag :project_id,
+              options_from_collection_for_select(selectable_projects(@projects), 
+              :id, :name, @projects.first.id) %>
+      </div>
     </div>
-  </div>
 
-  <div class="control-group">
-    <%= label_tag :user_id, nil, class: 'control-label' %>
-    <div class="controls">
-      <%= select_tag :user_id,
-            options_from_collection_for_select(@unpicked_users, 
-            :id, :name, @unpicked_users.first.id) %>
+    <div class="control-group">
+      <%= label_tag :user_id, nil, class: 'control-label' %>
+      <div class="controls">
+        <%= select_tag :user_id,
+              options_from_collection_for_select(@unpicked_users, 
+              :id, :name, @unpicked_users.first.id) %>
+      </div>
     </div>
-  </div>
-  
-  <div class="form-actions">
-    <%= submit_tag 'Add User to Project', class: 'btn' %>
-  </div>
+    
+    <div class="form-actions">
+      <%= submit_tag 'Add User to Project', class: 'btn' %>
+    </div>
+  <% end %>
+
 <% end %>
