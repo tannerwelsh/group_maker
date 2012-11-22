@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
   def home
     @projects = Project.sorted_by_votes
-    @users    = User.alphabetized.includes(:choices)
+    @users    = User.students.alphabetized.includes(:choices)
     @user     = current_user || User.new
 
     @choices  = @user.load_choices

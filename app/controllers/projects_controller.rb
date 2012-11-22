@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.includes(:members, :creator, :choices)
-    @unpicked_users = User.needs_project
+    @unpicked_users = User.students.needs_project
 
     respond_to do |format|
       format.html # index.html.erb
@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
     return redirect_to root_path unless user_signed_in?
 
     @project = Project.new
-    @users   = User.alphabetized
+    @users   = User.students.alphabetized
 
     respond_to do |format|
       format.html # new.html.erb

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many    :choices,           class_name: 'ProjectChoice'
   has_many    :created_projects,  class_name: 'Project', foreign_key: :creator_id
 
+  scope :students, where(role: 'student')
+
   acts_as_voter
 
   # Setup accessible (or protected) attributes for your model
