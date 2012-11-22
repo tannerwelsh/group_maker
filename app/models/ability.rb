@@ -15,15 +15,12 @@ class Ability
         cannot :manage, ProjectChoice
       end  
 
-      can    :create,   Project
-      cannot :read,     Project
+      cannot :manage,   Project
       if Settings.voting
         can  :upvote,   Project
       else
         cannot :upvote, Project
       end
-      cannot :destroy,  Project
-      cannot :update,   Project
     else
       cannot :manage,   :all
     end
