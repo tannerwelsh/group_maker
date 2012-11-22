@@ -70,5 +70,8 @@ module GroupMaker
 
     # Allow users to make their choice selection on projects
     config.permit_choices = false
+
+    # Show the final groups for each project
+    config.permit_display_groups = false
   end
 end

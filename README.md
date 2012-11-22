@@ -32,7 +32,6 @@ To run the group generator algorithm, press the `Make Groups` button in `/admin/
 *Pending*
 
 - More validations
-- Add toggle for displaying final project group info
 
 *Complete*
 
@@ -40,3 +39,4 @@ To run the group generator algorithm, press the `Make Groups` button in `/admin/
 - Better visual data
 - Fix form to add unpicked users
 - Add authorization layer
+- Add toggle for displaying final project group info

@@ -1,5 +1,5 @@
 class Settings
-  CONFIG_OPTIONS = [:voting, :choices]
+  CONFIG_OPTIONS = [:voting, :choices, :display_groups]
 
   def self.config
     Hash[CONFIG_OPTIONS.map do |option|

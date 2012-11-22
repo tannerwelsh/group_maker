@@ -13,7 +13,7 @@
   </div>
 
   <div id="users" class="span8">
-    <% if @user_project %>
+    <% if @user_project && Settings.display_groups %>
       <div class="alert alert-success">
         <h3><i>Congratulations! You've been selected for:</i> <%= @user_project.name %></h3>
         <p>Your Teammates: <%= @user_project.member_names.join(', ') %></p>
