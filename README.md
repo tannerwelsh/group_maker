@@ -8,11 +8,12 @@ A simple app to vote on and select members for groups.
 
 *Pending*
 
-- Add authorization layer
 - More validations
+- Correct student data
 
 *Complete*
 
 - Ensure that project creators get chosen
 - Better visual data
 - Fix form to add unpicked users
+- Add authorization layer
