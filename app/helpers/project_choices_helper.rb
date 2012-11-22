@@ -1,6 +1,6 @@
 module ProjectChoicesHelper
   def display_name(choice)
-    choice.project.name
+    choice ? choice.project.name : "nil"
   end
 
   def enumerated_choice_label(form)

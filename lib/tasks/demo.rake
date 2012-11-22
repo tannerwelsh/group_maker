@@ -22,8 +22,6 @@ namespace :demo do
 
         creator = User.find_by_name(project_lead_name)
         project = creator.created_projects.create(name: project_name)
-        
-        creator.choices.create(project_id: project.id, priority: 1)
       end
     end  
 
