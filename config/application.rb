@@ -65,6 +65,10 @@ module GroupMaker
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Will initialize the application when precompiling assets
+    # This should be set to 'false' for deploying to heroku
+    config.assets.initialize_on_precompile = false
+
     # Allow users to vote on projects
     config.permit_voting = true
 
