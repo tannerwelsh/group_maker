@@ -9,7 +9,6 @@ A simple app to vote on and select members for groups.
 *Pending*
 
 - More validations
-- Correct student data
 
 *Complete*
 
