@@ -34,10 +34,15 @@
   </div>
 
   <div id="unpicked_users" class="span6">
-    <%= link_to 'Make Groups!', make_groups_path, method: :post, class: 'btn btn-primary' %>
+    <%= form_tag make_groups_path, method: :post do %>
+      <%= label_tag :loop_times %>
+      <%= number_field_tag :loop_times, 10, in: 1..50 %>
+
+      <%= submit_tag 'Make Groups!', class: 'btn btn-primary' %>
+    <% end %>
 
     <%= link_to 'Destroy Groups!', destroy_groups_path, method: :post, class: 'btn btn-danger' %>
-    
+
     <h2>Unpicked Users</h2>
 
     <%= render 'users/list', users: @unpicked_users %>

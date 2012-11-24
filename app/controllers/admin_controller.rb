@@ -13,7 +13,11 @@ class AdminController < ApplicationController
   end
 
   def make_groups
-    GroupList.generate!
+    loop_times = (params[:loop_times] || 1).to_i
+
+    loop_times.times do
+      GroupList.generate!
+    end
 
     redirect_to projects_path
   end
