@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :choices
 
+  validates :name, presence: true
+
   scope :students,      where(role: 'student')
   scope :has_project,   students.where('project_id IS NOT NULL')
   scope :needs_project, students.where('project_id IS NULL')
