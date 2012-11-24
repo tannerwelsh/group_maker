@@ -10,7 +10,14 @@ module ProjectsHelper
   def probability_indicator(project)
     percentage = project.probability_for_acceptance
 
-    percentage < 150 ? "#{percentage}%" : "Low interest"
+    case
+    when percentage >= 150
+      "Interest too low"
+    when 100 < percentage && percentage < 150
+      "Outlook looks good"
+    else
+      "#{percentage}%"
+    end
   end
 
   def members_colorized_by_choice(project)
