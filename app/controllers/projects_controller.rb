@@ -4,6 +4,8 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    authorize! :manage, GroupList
+
     @projects = Project.includes(:creator, :members => [:choices])
     @unpicked_users = User.needs_project.includes(:choices => [:project])
 

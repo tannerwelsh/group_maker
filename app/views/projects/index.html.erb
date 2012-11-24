@@ -34,6 +34,10 @@
   </div>
 
   <div id="unpicked_users" class="span6">
+    <%= link_to 'Make Groups!', make_groups_path, method: :post, class: 'btn btn-primary' %>
+
+    <%= link_to 'Destroy Groups!', destroy_groups_path, method: :post, class: 'btn btn-danger' %>
+    
     <h2>Unpicked Users</h2>
 
     <%= render 'users/list', users: @unpicked_users %>
