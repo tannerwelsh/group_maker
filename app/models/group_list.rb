@@ -8,7 +8,21 @@ class GroupList
   end
 
   def self.generate!
-    new.generate_groups!
+    users_without_a_project = User.needs_project.count
+
+    ActiveRecord::Base.transaction do
+      GroupList.destroy_all!
+
+      GroupList.new.generate_groups!
+
+      if User.needs_project.count >= users_without_a_project
+        raise ActiveRecord::Rollback
+      end
+    end
+  end
+
+  def self.destroy_all!
+    Project.all.each(&:purge_members!)
   end
 
   def generate_groups!
