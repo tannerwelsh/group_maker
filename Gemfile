@@ -29,6 +29,7 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'sqlite3'
   gem 'quiet_assets'
+  gem 'bullet'
   gem 'rspec-rails'
 end
 
