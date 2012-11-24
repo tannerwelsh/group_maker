@@ -4,8 +4,8 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.includes(:members, :creator, :choices)
-    @unpicked_users = User.needs_project
+    @projects = Project.includes(:creator, :members => [:choices])
+    @unpicked_users = User.needs_project.includes(:choices => [:project])
 
     respond_to do |format|
       format.html # index.html.erb

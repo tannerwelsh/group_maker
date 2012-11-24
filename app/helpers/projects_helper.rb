@@ -4,7 +4,7 @@ module ProjectsHelper
   end
 
   def project_id_for(form)
-    form.object.project.id if form.object.project
+    form.object.project_id if form.object.project_id
   end
 
   def probability_indicator(project)
