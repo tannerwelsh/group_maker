@@ -1,7 +1,7 @@
 .first_choice     { font-weight: bold; color: #000; }
 .second_choice    { font-style: italic; color: #555; }
 .third_choice     { color: #999; }
-.no_choice        { color: #CCC; }
+.no_choice        { color: red; }
 .project_creator  { font-weight: bold; color: #55048B; }
 
 .project_name   { 

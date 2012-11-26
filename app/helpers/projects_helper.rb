@@ -24,8 +24,10 @@ module ProjectsHelper
     html = project.members.map do |member|
       if member == project.creator
         css_class = 'project_creator'
+      elsif project.choice_for(member)
+        css_class = class_for_priority(project.choice_for(member).priority)
       else
-        css_class = class_for_priority(project.choice_for(member))
+        css_class = class_for_priority(0)
       end
 
       "<span class=\"#{css_class}\">#{member.name}</span>"

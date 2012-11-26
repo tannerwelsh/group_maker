@@ -7,8 +7,8 @@ module ProjectChoicesHelper
     form.label :project_id, "\##{form.object.priority.to_s}"
   end
 
-  def class_for_priority(choice)
-    case choice.priority
+  def class_for_priority(priority)
+    case priority.to_i
     when 1
       'first_choice'
     when 2

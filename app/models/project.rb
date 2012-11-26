@@ -41,7 +41,7 @@ class Project < ActiveRecord::Base
   end
 
   def choice_for(member)
-    choices.includes(:user).detect { |choice| choice.user == member } || 0
+    choices.includes(:user).detect { |choice| choice.user == member } || false
   end
 
   def group_size
